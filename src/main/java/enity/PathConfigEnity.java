@@ -2,8 +2,16 @@ package enity;
 
 import java.util.List;
 
+/**
+ * <p>文件路径的相关配置文件类</p>
+ * @author sangsong6th
+ * @since 2021/5/24
+ */
 public class PathConfigEnity {
 
+    /**
+     *文件配置文件列表
+     */
     private List<PathUnitConfigEnity> pathUnitConfigEnityList;
 
     /**
@@ -22,29 +30,52 @@ public class PathConfigEnity {
     private String virClassPath;
 
     /**
-     * 虚拟映射地址
+     * 虚拟映射地址，也就是这个虚拟分类地址所有的文件地址
      */
     private List<String> virClassPaths;
 
+    /**
+     *是否是需要更新的文件路径
+     */
     private boolean bolnUpdataOver;
 
+    /**
+     *是否是分类目录
+     */
     private boolean bolnClassRoot;
-
+    /**
+     *是否是分布式目录
+     */
     private boolean bolnDistributeDir;
-
+    /**
+     *分布式目录列表
+     */
     private List<String> DistributedDir;
-
+    /**
+     *是否是虚拟路径
+     */
     private boolean bolnVirPath;
-
+    /**
+     *是否是主路径
+     */
     private boolean bolnMaster;
-
+    /**
+     *主路径
+     */
     private String masterDir;
-
+    /**
+     *从路径列表
+     */
     private List<String> slaveDir;
-
+    /**
+     *是否是从路径
+     */
     private boolean bolnSlave;
-
+    /**
+     *用来索引的hashcode
+     */
     private String hashcode;
+
 
     public PathConfigEnity() {
     }

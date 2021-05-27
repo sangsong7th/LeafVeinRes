@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 
 /**
- * <
+ * <p>处理</p>
  * @author sangsong6th
  * @since 2021/2/15
  */
@@ -20,6 +20,7 @@ public class FilePathEnity {
      * 1:是文件路径
      * 2:是文件
      * 4:是软件用文件
+     * 这样设计的目的是为了处理方便位运算
      */
     private long isFile;
 

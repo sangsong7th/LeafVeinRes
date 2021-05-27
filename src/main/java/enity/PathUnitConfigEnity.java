@@ -1,14 +1,47 @@
 package enity;
 
+/**
+ * <p>文件配置文件或者是文件路径</p>
+ * @author sangsong6th
+ * @since 2021/5/24
+ */
 public class PathUnitConfigEnity {
+
+    /*
+    文件名字
+     */
     private String name;
+    /*
+    当前地址
+     */
     private String locationPath;
+    /*
+    真实文件存放地址
+     */
     private String truePath;
+    /*
+    是否需要更新
+     */
     private boolean bolnUpdata;
+    /*
+    文件大小单位字节
+     */
     private Long size;
+    /*
+    文件完整性验证md5
+     */
     private String md5;
+    /*
+    是否是一个文件夹
+     */
     private boolean bolnDir;
+    /*
+    是否是虚拟地址
+     */
     private boolean bolnVir;
+    /*
+    是否是可以扫描的地址
+     */
     private boolean isScannerDir;
 
     public PathUnitConfigEnity() {

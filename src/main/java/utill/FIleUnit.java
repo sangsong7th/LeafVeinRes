@@ -8,7 +8,9 @@ import java.security.MessageDigest;
 import static sun.security.pkcs11.wrapper.Functions.toHexString;
 
 /**
- *
+ * <p>文件处理相关的工具类</p>
+ * @author sangsong6th
+ * @since 2021/5/27
  */
 public class FIleUnit {
 

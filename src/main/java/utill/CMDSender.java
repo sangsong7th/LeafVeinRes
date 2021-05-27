@@ -1,7 +1,10 @@
 package utill;
 
+import annotation.WillBeOptimized;
+
 import java.io.*;
 
+@WillBeOptimized(value = "")
 public class CMDSender implements Runnable{
 
     private PipedOutputStream out = null;

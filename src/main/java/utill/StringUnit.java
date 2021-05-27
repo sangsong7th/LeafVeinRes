@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * <p>文件处理相关的工具类</p>
+ * @author sangsong6th
+ * @since 2021/5/27
+ */
 public class StringUnit {
 
     final static private Base64.Encoder encoder = Base64.getEncoder();
