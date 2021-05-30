@@ -31,6 +31,8 @@ public class FirestCreatFileConfig implements CreateFileConfig {
                 false,false,false,
                 "",null,"",
                 "",null,"",null);
+
+
         String result= JSONObject.toJSONString(pathConfigEnity);
 
         FIleUnit.outputJSONString(result,locationPath+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
@@ -45,6 +47,7 @@ public class FirestCreatFileConfig implements CreateFileConfig {
         FIleUnit.outputJSONString(result,pathConfigEnity.getLocationPath()+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
         return true;
     }
+
 
     public PathConfigEnity buildPathConfigEnity (FilePathEnity filePathEnity,
                                                  boolean bolnClassRoot,

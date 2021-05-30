@@ -4,7 +4,7 @@ import annotation.WillBeOptimized;
 
 import java.io.*;
 
-@WillBeOptimized(value = "")
+@WillBeOptimized(contract = "sangsong6th",action = "",details = "",date="2021-05-01")
 public class CMDSender implements Runnable{
 
     private PipedOutputStream out = null;

@@ -11,7 +11,7 @@ import java.util.List;
  * @author sangsong6th
  * @since 2021/5/27
  */
-@WillBeOptimized(value = "",action = "")
+@WillBeOptimized(contract = "sangsong6th",action = "",details = "",date="2021-05-01")
 public interface SearchExcute {
 
     void Excute(FilePathEnity filePathEnity);
