@@ -1,17 +1,16 @@
-package inface;
+package Service.systemlevel;
 
 import enity.FilePathEnity;
 import enity.PathConfigEnity;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * <p>用于生成路径配置文件</p>
+ * <p>用于release配置文件</p>
  * @author sangsong6th
  * @since 2021/5/27
  */
-public interface CreateFileConfig {
+public interface FileConfigService {
 
     /**
      * <p>通过路径实体创建文件配置</p>

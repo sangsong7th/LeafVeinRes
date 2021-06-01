@@ -1,23 +1,8 @@
-import enity.FilePathEnity;
-import impl.BFSFilePath;
-import impl.CMDRUNTemp;
-import impl.FirestCreatFileConfig;
-import impl.FirstCreatFilePath;
-import inface.CreateFileConfig;
-import inface.CreateFilePath;
-import inface.FindFilePath;
-import inface.cmd.CMDRUN;
-import inface.userlevel.FileUpdata;
-import utill.FIleUnit;
+package test;
+
 import utill.StringUnit;
 
-import java.awt.peer.SystemTrayPeer;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {

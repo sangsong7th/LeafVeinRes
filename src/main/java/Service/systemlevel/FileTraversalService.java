@@ -1,4 +1,4 @@
-package inface.userlevel;
+package Service.systemlevel;
 
 
 /**
@@ -6,7 +6,7 @@ package inface.userlevel;
  * @author sangsong6th
  * @since 2021/4/26
  */
-public interface FileTraversal {
+public interface FileTraversalService {
 
     /**
      * <p>返回当前目录位置</p>

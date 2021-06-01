@@ -1,11 +1,10 @@
 package impl;
 
-import enity.FilePathEnity;
-import inface.CreateFilePath;
+import Service.CreateFilePath;
+import annotation.WillBeOptimized;
 import utill.FIleUnit;
 import utill.StringUnit;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -24,10 +23,16 @@ public class FirstCreatFilePath implements CreateFilePath {
         Stack<String> tempA=new Stack<>();
         Stack<String> tempB=new Stack<>();
 
+        /*
+         * 解析字符串遍历目录成list
+         */
+        @WillBeOptimized(action = "chonggou",contract = "",details = "",date = "")
         long flag=0;
         for(String subUnit:subClassify){
+
             List<String> overClassify=StringUnit.stringSplit(subUnit,";");
             if(tempA.size()==0||tempB.size()==0){
+
                 if(flag==0){
                     for(String unit:overClassify){
                         tempA.push(""+unit);
@@ -35,6 +40,7 @@ public class FirstCreatFilePath implements CreateFilePath {
                     flag=1;
                     continue;
                 }
+
                 if(flag==1){
                     while (!tempA.isEmpty()){
                         String before=tempA.pop();
@@ -45,6 +51,7 @@ public class FirstCreatFilePath implements CreateFilePath {
                     flag=2;
                     continue;
                 }
+
                 if(flag==2){
                     while (!tempB.isEmpty()){
                         String before=tempB.pop();
@@ -67,6 +74,9 @@ public class FirstCreatFilePath implements CreateFilePath {
             FIleUnit.createDir(temp);
         }
 
+        /*
+       通过分类的根目录文件进行config建立
+         */
         BFSFilePath bfsFilePath=new BFSFilePath();
         bfsFilePath.searchAllnoReturn(classifyRoot,"SearchExcuteForCreateFileConfig");
 

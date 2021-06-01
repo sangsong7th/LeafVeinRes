@@ -1,7 +1,7 @@
 package impl.userlevel;
 
 import impl.BFSFilePath;
-import inface.userlevel.FileTraversal;
+import Service.systemlevel.FileTraversal;
 
 /**
  *

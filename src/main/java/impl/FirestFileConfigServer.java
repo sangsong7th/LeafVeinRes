@@ -1,11 +1,11 @@
 package impl;
 
+import Service.systemlevel.FileConfigService;
 import com.sun.istack.internal.NotNull;
 import enity.PathConfigEnity;
 import enity.PathUnitConfigEnity;
-import inface.CreateFileConfig;
-import inface.FileConfigServer;
-import inface.userlevel.FileUpdata;
+
+import Service.FileConfigServer;
 import utill.FIleUnit;
 import utill.StringUnit;
 
@@ -91,7 +91,7 @@ public class FirestFileConfigServer implements FileConfigServer {
 
         pathConfigEnity.setPathUnitConfigEnityList(pathUnitConfigEnities);
 
-        CreateFileConfig createFileConfig=new FirestCreatFileConfig();
+        FileConfigService createFileConfig=new FirestCreatFileConfig();
 
         createFileConfig.createFileConfig(pathConfigEnity);
 

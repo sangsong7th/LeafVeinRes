@@ -1,23 +1,18 @@
 package impl;
 
+import Service.systemlevel.FileConfigService;
 import com.alibaba.fastjson.JSONObject;
 import enity.FilePathEnity;
 import enity.PathConfigEnity;
 import enity.PathUnitConfigEnity;
-import inface.CreateFileConfig;
 import utill.FIleUnit;
 import utill.StringUnit;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirestCreatFileConfig implements CreateFileConfig {
+public class FirestCreatFileConfig implements FileConfigService {
     @Override
     public boolean createFileConfig(FilePathEnity filePathEnity) throws IOException {
         /*
