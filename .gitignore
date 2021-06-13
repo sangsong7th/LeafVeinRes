@@ -3,13 +3,15 @@
 /workspace.xml
 
 # Datasource local storage ignored files
-/../../../../:\IDEA\LeafVeinRes\.idea/dataSources/
+/../../../../:\IDEA\LeafVeinRes\
+.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 /target/
 /out/
 /artifacts/
+/.idea/
 
 *.jar
 *.war
