@@ -1,6 +1,6 @@
 package test;
 
-import http.request.NettyServerFilter;
+import connect.request.NettyServerFilter;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;

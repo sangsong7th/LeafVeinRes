@@ -1,4 +1,4 @@
-package http.entity;
+package connect.entity;
 
 public class FileTraversalEnity {
 

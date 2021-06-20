@@ -1,13 +1,7 @@
-package http.request;
+package connect.request;
 
-import http.aop.NettyToBean;
-import http.aop.Scanner;
-import http.entity.FileBuildEnity;
-import http.entity.FileTraversalEnity;
-import impl.userlevel.FileBuildServiceImpl;
-import impl.userlevel.FileTraversalImpl;
-import Service.userlevel.FileBuildService;
-import Service.systemlevel.FileTraversal;
+import connect.aop.Scanner;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -64,18 +58,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
                 String result=null;
 
-                if(paths.get(paths.size()-1).equals("buildclasspaths")){
-                    FileBuildService fIleBuild=new FileBuildServiceImpl();
-                    FileBuildEnity fileBuildEnity= (FileBuildEnity) NettyToBean.getchange(decoder, FileBuildEnity.class);
-                    result=fIleBuild.BuildClassPaths(StringUnit.getStrbyBase64(fileBuildEnity.getClassifyStr()),StringUnit.getStrbyBase64(fileBuildEnity.getClassRoot()))?"true":"false";
 
-                }
-
-                if(paths.get(paths.size()-1).equals("filepathcurrentlist")){
-                    FileTraversal fileTraversal=new FileTraversalImpl();
-                    FileTraversalEnity fileTraversalEnity= (FileTraversalEnity) NettyToBean.getchange(decoder,FileTraversalEnity.class);
-                    result=fileTraversal.FilePathCurrentList(fileTraversalEnity.getFilePath());
-                }
 
                 //Test test= (Test) NettyToBean.getchange(decoder,Test.class);
 

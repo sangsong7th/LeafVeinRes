@@ -191,18 +191,15 @@ public class BFSFilePath implements FindFilePath {
         return null;
     }
 
-
-
     @Override
-    public void getAllForJSONFile() {
-
+    public List<FilePathEnity> findCurrentPath(String path) {
+        return null;
     }
 
     @Override
-    public void getAllforStringFile() {
-
+    public List<FilePathEnity> findCurrentPath() {
+        return null;
     }
-
 
 
 }

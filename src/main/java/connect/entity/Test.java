@@ -1,6 +1,6 @@
-package http.entity;
+package connect.entity;
 
-import http.annotation.NettyEntity;
+import connect.annotation.NettyEntity;
 
 @NettyEntity({})
 public class Test {
