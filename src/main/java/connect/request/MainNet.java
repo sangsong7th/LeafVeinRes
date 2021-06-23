@@ -1,4 +1,4 @@
-package test;
+package connect.request;
 
 import connect.request.NettyServerFilter;
 import io.netty.bootstrap.ServerBootstrap;

@@ -1,11 +1,15 @@
 package test;
 
-import utill.StringUnit;
+import Service.userlevel.FileBuildService;
+import impl.userlevel.FileBuildServiceImpl;
+import utill.FIleUnit;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        FileBuildService fileBuildService=new FileBuildServiceImpl();
+        fileBuildService.BuildClassPaths("/A;B;C/1;2/C;B;D","E:\\");
 
 //        BFSFilePath findFilePath=new BFSFilePath("D:\\testspace\\cxttpc\\service_content");
 //        FilePathEnity filePathEnity=findFilePath.findPathlist();
@@ -19,10 +23,9 @@ public class Main {
 //            BFSFilePath bfsFilePath=new BFSFilePath();
 //            bfsFilePath.searchAllnoReturn("D:\\testspace\\A","SearchExcuteForCreateFileConfig");
 
-            System.out.println(StringUnit.getBase64("/A;B;C/1;2/C;B;D"));
 
-            System.out.println(StringUnit.getBase64("D:\\testspace"));
 
+        /**
             //遍历更新配置文件
                 //判断是否存在配置文件
                 //判断配置文件是否和文件配置相符
@@ -52,6 +55,12 @@ public class Main {
             //复制文件
 
             //分布式路径
+         **/
+
+
+
+
+
 
     }
 }

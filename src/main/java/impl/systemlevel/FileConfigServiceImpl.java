@@ -203,9 +203,8 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         List<PathUnitConfigEnity> pathUnitConfigEnities=pathConfigEnity.getPathUnitConfigEnityList();
 
-        FirestCreatFileConfig firestCreatFileConfig=new FirestCreatFileConfig();
 
-        PathUnitConfigEnity pathUnitConfigEnity=firestCreatFileConfig.buildPathUnitConfigEnity(
+        PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
                 new File(path).isFile(),
                 false,false,
                 path,true,"");
@@ -214,9 +213,7 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         pathConfigEnity.setPathUnitConfigEnityList(pathUnitConfigEnities);
 
-        FileConfigService createFileConfig=new FirestCreatFileConfig();
-
-        createFileConfig.createFileConfig(pathConfigEnity);
+        createFileConfig(pathConfigEnity);
 
         return true;
 
@@ -238,11 +235,10 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         File[] files=file.listFiles();
 
-        FirestCreatFileConfig firestCreatFileConfig=new FirestCreatFileConfig();
 
         for(File fileUnit:files){
 
-            PathUnitConfigEnity pathUnitConfigEnity=firestCreatFileConfig.buildPathUnitConfigEnity(
+            PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
                     fileUnit.isFile(),
                     false,false,
                     fileUnit.getPath(),true,"");
@@ -264,7 +260,7 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         List<PathUnitConfigEnity> pathUnitConfigEnities=pathConfigEnity.getPathUnitConfigEnityList();
 
-        FirestCreatFileConfig firestCreatFileConfig=new FirestCreatFileConfig();
+
 
         for(String path:pathUnitConfigEnityMap.keySet()){
 
@@ -274,7 +270,7 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         pathConfigEnity.setPathUnitConfigEnityList(pathUnitConfigEnities);
 
-        firestCreatFileConfig.createFileConfig(pathConfigEnity);
+        createFileConfig(pathConfigEnity);
 
         return false;
     }
