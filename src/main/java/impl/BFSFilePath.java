@@ -113,9 +113,11 @@ public class BFSFilePath implements FindFilePath {
         if(this.path.equals("")){
             File[] roots=File.listRoots();
             List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            for(File file:roots){
-                FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null,file.isFile()?1:0);
-                filePathEnities.add(filePathEnitytemp);
+            if(roots!=null){
+                for(File file:roots){
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null,file.isFile()?1:0);
+                    filePathEnities.add(filePathEnitytemp);
+                }
             }
             FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,0);
             return filePathEnity;
@@ -124,11 +126,13 @@ public class BFSFilePath implements FindFilePath {
             File dir=new File(this.path);
             File[] files=dir.listFiles();
             List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            for(File file:files) {
-                FilePathEnity filePathEnitytemp = new FilePathEnity(file.getPath(), null, null, file.isFile()?1:0);
-                filePathEnities.add(filePathEnitytemp);
+            if(files!=null){
+                for(File file:files) {
+                    FilePathEnity filePathEnitytemp = new FilePathEnity(file.getPath(), null, null, file.isFile()?1:0);
+                    filePathEnities.add(filePathEnitytemp);
+                }
             }
-            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,0);
+            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,dir.isFile()?1:0);
             return filePathEnity;
 
         }

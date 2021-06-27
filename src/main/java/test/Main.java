@@ -9,8 +9,15 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         FileBuildService fileBuildService=new FileBuildServiceImpl();
-        fileBuildService.BuildClassPaths("/A;B;C/1;2/C;B;D","E:\\");
+        /**
+         * list 添加
+         */
+        /**
+         * 单个添加
+         */
+//        fileBuildService.BuildClassPaths("/文字;图片;视频;混合;声音/","E:\\媒体");
 
+//
 //        BFSFilePath findFilePath=new BFSFilePath("D:\\testspace\\cxttpc\\service_content");
 //        FilePathEnity filePathEnity=findFilePath.findPathlist();
 //        CreateFileConfig createFileConfig=new FirestCreatFileConfig();

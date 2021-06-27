@@ -20,10 +20,17 @@ public class FileConfigServiceImpl implements FileConfigService {
 
     @Override
     public boolean createFileConfig(FilePathEnity filePathEnity) throws IOException {
+        /**
+         * 判断是否是文件路径
+         */
+        if(filePathEnity.getIsFile()!=0){
+            return false;
+        }
         /*
         获取主路径
          */
         String locationPath=filePathEnity.getAbsolutePath();
+
 
         List<String> locationPathSplits= StringUnit.stringSplit(locationPath,"\\\\");
 
