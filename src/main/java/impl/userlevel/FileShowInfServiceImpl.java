@@ -1,7 +1,7 @@
 package impl.userlevel;
 
 import Service.userlevel.FileShowInfService;
-import vo.FileListShowVo;
+import view.FileShowView;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class FileShowInfServiceImpl implements FileShowInfService {
 
 
     @Override
-    public List<FileListShowVo> getFileListShowForCurrentPathByCurrentPath(String filePath) {
+    public List<FileShowView> getFileListShowForCurrentPathByCurrentPath(String FilePath) {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package Service.userlevel;
 
-import vo.FileListShowVo;
+import view.FileShowView;
+
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface FileShowInfService {
      * @param FilePath
      * @return FileListShowVo
      */
-    List<FileListShowVo> getFileListShowForCurrentPathByCurrentPath(String FilePath);
+    List<FileShowView> getFileListShowForCurrentPathByCurrentPath(String FilePath);
 }

@@ -19,7 +19,7 @@ public class FilePathEnity {
     /**
      * 1:是文件路径
      * 2:是文件
-     * 4:是软件用文件
+     * 4:是文件封装成软件形式的文件
      * 这样设计的目的是为了处理方便位运算
      */
     private long isFile;
