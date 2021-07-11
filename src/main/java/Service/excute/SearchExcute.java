@@ -11,6 +11,6 @@ import enity.FilePathEnity;
 @WillBeOptimized(contract = "sangsong6th",action = "",details = "",date="2021-05-01")
 public interface SearchExcute {
 
-    void Excute(FilePathEnity filePathEnity);
+    void Excute(Object ...data);
 
 }

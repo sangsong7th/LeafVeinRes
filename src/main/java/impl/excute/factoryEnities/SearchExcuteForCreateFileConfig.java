@@ -10,15 +10,8 @@ import java.io.IOException;
 public class SearchExcuteForCreateFileConfig implements SearchExcute {
 
     @Override
-    public void Excute(FilePathEnity filePathEnity) {
+    public void Excute(Object ...args) {
 
-        FileConfigService fileConfigService=new FileConfigServiceImpl();
-
-        try {
-            fileConfigService.createFileConfig(filePathEnity);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 

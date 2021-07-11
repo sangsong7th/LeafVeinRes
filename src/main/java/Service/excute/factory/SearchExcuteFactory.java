@@ -17,6 +17,9 @@ public class SearchExcuteFactory {
             case "SearchExcuteForCreateFileConfig":{
                 return new SearchExcuteForCreateFileConfig();
             }
+            case "SearchExcuteForCreateFileConfig2":{
+                return new SearchExcuteForCreateFileConfig();
+            }
         }
 
         return null;

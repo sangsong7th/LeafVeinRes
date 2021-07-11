@@ -1,67 +1,25 @@
-package impl.userlevel;
+package utill;
 
 import annotation.WillBeOptimized;
-import impl.BFSFilePath;
-import Service.userlevel.FileBuildService;
-import utill.FIleUnit;
-import utill.StringUnit;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 /**
- * @author sangsong6th
- * @since 2021/5/21
- * @version 1.0.0
+ * <p></p>
  */
-public class FileBuildServiceImpl implements FileBuildService {
-    
-    private BFSFilePath bfsFilePath = new BFSFilePath();
-
-
-    @Override
-    public boolean buildClassPaths(String classifyPath, String classifyRoot) {
-
-
-        return true;
-    }
-
-    @Override
-    public boolean buildClassPaths(Map<String, String> classifyStrAndRoots) {
-
-        for(String key: classifyStrAndRoots.keySet()){
-            buildClassPaths(key,classifyStrAndRoots.get(key));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean buildClassPaths(List<String> classifyStrs, String classRoot) {
-
-        for(String unit:classifyStrs){
-            buildClassPaths(unit,classRoot);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean buildClassPaths(String classifyStr, List<String> classRoots) {
-        for(String unit:classRoots){
-            buildClassPaths(classifyStr,unit);
-        }
-        return false;
-    }
+public class ExplanationUnit {
 
     /**
      * <p>进行分类构建</p>
      * /A;B;C/1;2/C;B;D
-     *
+     * @author sangsong6th
+     * @since 2021/7/11
      * @param classifyPath
-     * @param classifyRoot
      * @return
      */
-    private boolean buidDClassPathsForSingle(String classifyPath, String classifyRoot) {
+    private Stack<String> explanClassifyPath(String classifyPath) {
+
         List<String> subClassify = StringUnit.stringSplit(classifyPath, "/");
         Stack<String> tempA = new Stack<>();
         Stack<String> tempB = new Stack<>();
@@ -111,14 +69,7 @@ public class FileBuildServiceImpl implements FileBuildService {
             tempA = tempB;
         }
 
-        while (!tempA.isEmpty()) {
-            String temp = classifyRoot + tempA.pop();
-            FIleUnit.createDir(temp);
-        }
-        
-        return true;
+        return tempA;
     }
 
-
-    
 }
