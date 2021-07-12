@@ -1,7 +1,8 @@
 package Service.excute.factory;
 
+import Service.excute.ProxyExcute;
 import impl.excute.factoryEnities.SearchExcuteForCreateFileConfig;
-import Service.excute.SearchExcute;
+
 
 /**
  * <p>SearchExcute的工厂</p>
@@ -11,7 +12,7 @@ import Service.excute.SearchExcute;
 
 public class SearchExcuteFactory {
 
-    public SearchExcute getPorduct(String classname){
+    public ProxyExcute getPorduct(String classname){
 
         switch (classname){
             case "SearchExcuteForCreateFileConfig":{

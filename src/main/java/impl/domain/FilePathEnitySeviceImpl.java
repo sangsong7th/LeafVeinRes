@@ -1,11 +1,12 @@
 package impl.domain;
 
 import Service.domain.FilePathEnitySevice;
-import Service.excute.SearchExcute;
+import Service.excute.ProxyExcute;
 import Service.excute.factory.SearchExcuteFactory;
 import enity.FilePathEnity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
     private String path;
 
-    private SearchExcute searchExcute;
+    private ProxyExcute proxyExcute;
 
     /**
      * 初始化，获取存储设备工具
@@ -56,7 +57,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     @Override
     public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
         SearchExcuteFactory searchExcuteFactory=new SearchExcuteFactory();
-        searchExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
+        proxyExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
 
         if(path.equals("")){
 
@@ -75,7 +76,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
     private void searchAllnoReturn(String path){
 
-        if(searchExcute==null){
+        if(proxyExcute==null){
             return;
         }
 
@@ -86,7 +87,12 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
         this.path=path;
 
         FilePathEnity filePathEnity=findCurrentPath();
-        searchExcute.Excute(filePathEnity);
+
+        try {
+            proxyExcute.Excute(filePathEnity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if(dir.isFile()){
             return;

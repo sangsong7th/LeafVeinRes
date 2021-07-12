@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="PorcupineLock" />
         <module name="LeafVeinRes" />
+        <module name="ByrgenwerthEye" />
       </profile>
     </annotationProcessing>
   </component>
