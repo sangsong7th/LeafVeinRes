@@ -13,12 +13,6 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
     private String path;
 
-    private FilePathEnity data;
-
-    private static boolean limit=false;
-
-    private static long isALL=0;
-
     private SearchExcute searchExcute;
 
     /**
@@ -39,107 +33,28 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     @Override
     public FilePathEnity findAll() {
 
-        if(this.path.equals("")){
-
-            File[] roots=File.listRoots();
-            List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            for(File file:roots){
-                List<FilePathEnity> filePathEnitiestemp=new ArrayList<FilePathEnity>();
-
-                long isFile=1;
-                if(file.isDirectory()){
-                    isFile=0;
-                }
-
-                filePathEnitiestemp=findFilePathEnity(file.getPath());
-
-                FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,filePathEnitiestemp,isFile);
-
-                filePathEnities.add(filePathEnitytemp);
-            }
-            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,0);
-            return filePathEnity;
-        }else{
-
-            File dir=new File(this.path);
-            File[] files=dir.listFiles();
-            List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            if(files!=null) {
-                for (File file : files) {
-                    List<FilePathEnity> filePathEnitiestemp = new ArrayList<FilePathEnity>();
-                    long isFile = 1;
-                    if (file.isDirectory()) {
-                        isFile = 0;
-                    }
-                    filePathEnitiestemp = findFilePathEnity(file.getPath());
-                    FilePathEnity filePathEnitytemp = new FilePathEnity(file.getPath(), null, filePathEnitiestemp, isFile);
-                    filePathEnities.add(filePathEnitytemp);
-                }
-            }
-            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities);
-            return filePathEnity;
-
-        }
-    }
-
-    private List<FilePathEnity> findFilePathEnity(String path){
-        File dir=new File(path);
-        if(dir.isDirectory()){
-            File[] fileTemps=dir.listFiles();
-            List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            if(fileTemps!=null&&fileTemps.length>0){
-
-                for(File file:fileTemps){
-                    List<FilePathEnity> filePathEnitiestemp=new ArrayList<FilePathEnity>();
-                    filePathEnitiestemp=findFilePathEnity(file.getPath());
-                    FilePathEnity filePathEnity=new FilePathEnity(file.getPath(),null,filePathEnitiestemp);
-                    filePathEnities.add(filePathEnity);
-                }
-                return filePathEnities;
-
-            }else {
-                return null;
-            }
-
-        }else{
-            return null;
-        }
-
+        return null;
 
     }
 
-    public FilePathEnity findPathlist(){
+    @Override
+    public FilePathEnity findAll(String path) {
 
-        if(this.path.equals("")){
-            File[] roots=File.listRoots();
-            List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            if(roots!=null){
-                for(File file:roots){
-                    FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null,file.isFile()?1:0);
-                    filePathEnities.add(filePathEnitytemp);
-                }
-            }
-            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,0);
-            return filePathEnity;
-        }else{
-
-            File dir=new File(this.path);
-            File[] files=dir.listFiles();
-            List<FilePathEnity> filePathEnities=new ArrayList<FilePathEnity>();
-            if(files!=null){
-                for(File file:files) {
-                    FilePathEnity filePathEnitytemp = new FilePathEnity(file.getPath(), null, null, file.isFile()?1:0);
-                    filePathEnities.add(filePathEnitytemp);
-                }
-            }
-            FilePathEnity filePathEnity=new FilePathEnity(this.path,null,filePathEnities,dir.isFile()?1:0);
-            return filePathEnity;
-
-        }
-
+        return null;
     }
 
-    public void searchAllnoReturn(String path,String searchExcuteImplName){
+    @Override
+    public FilePathEnity findCurrentPath(String path) {
+        return null;
+    }
+
+    @Override
+    public FilePathEnity findCurrentPath() {
+        return null;
+    }
+
+    @Override
+    public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
         SearchExcuteFactory searchExcuteFactory=new SearchExcuteFactory();
         searchExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
 
@@ -155,6 +70,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
             searchAllnoReturn(path);
 
         }
+        return null;
     }
 
     private void searchAllnoReturn(String path){
@@ -169,7 +85,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
         this.path=path;
 
-        FilePathEnity filePathEnity=findPathlist();
+        FilePathEnity filePathEnity=findCurrentPath();
         searchExcute.Excute(filePathEnity);
 
         if(dir.isFile()){
@@ -191,17 +107,16 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
-    public FilePathEnity findAll(String path) {
+    public FilePathEnitySevice traversalAll(String path) {
         return null;
     }
 
-    @Override
-    public List<FilePathEnity> findCurrentPath(String path) {
-        return null;
-    }
 
-    @Override
-    public List<FilePathEnity> findCurrentPath() {
-        return null;
-    }
+
+
+
+
+
+
+
 }

@@ -13,7 +13,12 @@ public interface FilePathEnitySevice {
 
     FilePathEnity findAll(String path);
 
-    List<FilePathEnity> findCurrentPath(String path);
+    FilePathEnity findCurrentPath(String path);
 
-    List<FilePathEnity> findCurrentPath();
+    FilePathEnity findCurrentPath();
+
+    FilePathEnitySevice traversalAll(String path,String searchExcuteImplName);
+
+    FilePathEnitySevice traversalAll(String searchExcuteImplName);
+
 }

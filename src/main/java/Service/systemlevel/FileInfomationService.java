@@ -1,4 +1,4 @@
 package Service.systemlevel;
 
-public class FileInfomationService {
+public interface FileInfomationService {
 }
