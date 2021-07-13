@@ -17,8 +17,25 @@ public interface FilePathEnitySevice {
 
     FilePathEnity findCurrentPath();
 
+    List<FilePathEnity> findLeafFile();
+
+    List<FilePathEnity> findLeafFile(String path);
+
+    List<FilePathEnity> releaseFilePath();
+
+    List<FilePathEnity> releaseFilePath(String path);
+
     FilePathEnitySevice traversalAll(String path,String searchExcuteImplName);
 
     FilePathEnitySevice traversalAll(String searchExcuteImplName);
+
+    FilePathEnitySevice traversalCurrentPath(String path,String searchExcuteImplName);
+
+    FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName);
+
+    FilePathEnitySevice traversalLeafFile(String path,String searchExcuteImplName);
+
+    FilePathEnitySevice traversalLeafFile(String searchExcuteImplName);
+
 
 }

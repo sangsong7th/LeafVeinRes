@@ -55,6 +55,26 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
+    public List<FilePathEnity> findLeafFile() {
+        return null;
+    }
+
+    @Override
+    public List<FilePathEnity> findLeafFile(String path) {
+        return null;
+    }
+
+    @Override
+    public List<FilePathEnity> releaseFilePath() {
+        return null;
+    }
+
+    @Override
+    public List<FilePathEnity> releaseFilePath(String path) {
+        return null;
+    }
+
+    @Override
     public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
         SearchExcuteFactory searchExcuteFactory=new SearchExcuteFactory();
         proxyExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
@@ -63,18 +83,18 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
             File[] roots=File.listRoots();
             for(File file:roots){
-                searchAllnoReturn(file.getPath());
+                traversalAllUnit(file.getPath());
             }
 
         }else{
 
-            searchAllnoReturn(path);
+            traversalAllUnit(path);
 
         }
         return null;
     }
 
-    private void searchAllnoReturn(String path){
+    private void traversalAllUnit(String path){
 
         if(proxyExcute==null){
             return;
@@ -105,7 +125,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
         }else {
 
             for(File file:files){
-                searchAllnoReturn(file.getPath());
+                traversalAllUnit(file.getPath());
             }
 
         }
@@ -117,12 +137,25 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
         return null;
     }
 
+    @Override
+    public FilePathEnitySevice traversalCurrentPath(String path, String searchExcuteImplName) {
+        return null;
+    }
 
+    @Override
+    public FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName) {
+        return null;
+    }
 
+    @Override
+    public FilePathEnitySevice traversalLeafFile(String path, String searchExcuteImplName) {
+        return null;
+    }
 
-
-
-
+    @Override
+    public FilePathEnitySevice traversalLeafFile(String searchExcuteImplName) {
+        return null;
+    }
 
 
 }
