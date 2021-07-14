@@ -8,6 +8,8 @@ import enity.FilePathEnity;
 import utill.FIleUnit;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +44,8 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
                     if(filePathEnities!=null){
                         filePathEnities.add(filePathEnitytemp);
                     }
-                    filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FIleUnit.judgeFileType(file));
                 }
+                filePathEnity=new FilePathEnity(this.path,null,filePathEnities, 1);
             }
         }else {
             File file=new File(this.path);
@@ -83,18 +85,62 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
-    public FilePathEnity findCurrentPath(String path) {
-        return null;
+    public FilePathEnity findCurrentPath(@NotNull String path) {
+        this.path=path;
+        return findCurrentPath();
     }
 
     @Override
     public FilePathEnity findCurrentPath() {
-        return null;
+        FilePathEnity filePathEnity=null;
+        if(this.path.equals("")){
+
+            File[] roots=File.listRoots();
+            if(roots!=null){
+                List<FilePathEnity> filePathEnities=new ArrayList<>();
+                for(File file:roots){
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null,FIleUnit.judgeFileType(file));
+                    if(filePathEnities!=null){
+                        filePathEnities.add(filePathEnitytemp);
+                    }
+                    filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FIleUnit.judgeFileType(file));
+                }
+            }
+
+        }else{
+            File file=new File(this.path);
+            File[] files=file.listFiles();
+            List<FilePathEnity> filePathEnities=new ArrayList<>();
+
+            if(files!=null && files.length>0){
+
+                for(File fileUnit:files){
+
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(fileUnit.getPath(),null,null,FIleUnit.judgeFileType(fileUnit));
+                    filePathEnities.add(filePathEnitytemp);
+
+                }
+            }
+            filePathEnity=new FilePathEnity(this.path,null,filePathEnities,FIleUnit.judgeFileType(file));
+        }
+        return filePathEnity;
     }
 
     @Override
     public List<FilePathEnity> findLeafFile() {
-        return null;
+        List<FilePathEnity> filePathEnities=new ArrayList<>();
+        if(this.path.equals("")){
+            File[] roots=File.listRoots();
+            if(roots!=null){
+                for(File file:roots){
+                    findLeafFileUnit(file,filePathEnities);
+                }
+            }
+        }else{
+            File file=new File(this.path);
+            File[] files=file.listFiles();
+        }
+        return filePathEnities;
     }
 
     @Override
@@ -102,14 +148,8 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
         return null;
     }
 
-    @Override
-    public List<FilePathEnity> releaseFilePath() {
-        return null;
-    }
-
-    @Override
-    public List<FilePathEnity> releaseFilePath(String path) {
-        return null;
+    private void findLeafFileUnit(File file,List<FilePathEnity> filePathEnities){
+        return;
     }
 
     @Override

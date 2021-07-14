@@ -22,7 +22,7 @@ public class FilePathEnity {
      * 4:是文件封装成软件形式的文件
      * 这样设计的目的是为了处理方便位运算
      */
-    private long isFile;
+    private long fileType;
 
     /**
      * 用于toString
@@ -36,18 +36,18 @@ public class FilePathEnity {
         this.files = files;
     }
 
-    public FilePathEnity(String absolutePath, FilePathEnity before, List<FilePathEnity> files, long isFile) {
+    public FilePathEnity(String absolutePath, FilePathEnity before, List<FilePathEnity> files, long fileType) {
         this.absolutePath = absolutePath;
         this.before = before;
         this.files = files;
-        this.isFile = isFile;
+        this.fileType = fileType;
     }
 
-    public FilePathEnity(String absolutePath, FilePathEnity before, List<FilePathEnity> files, long isFile, JSONObject result) {
+    public FilePathEnity(String absolutePath, FilePathEnity before, List<FilePathEnity> files, long fileType, JSONObject result) {
         this.absolutePath = absolutePath;
         this.before = before;
         this.files = files;
-        this.isFile = isFile;
+        this.fileType = fileType;
         this.result = result;
     }
 
@@ -84,11 +84,11 @@ public class FilePathEnity {
     }
 
     public long getIsFile() {
-        return isFile;
+        return fileType;
     }
 
     public void setIsFile(long isFile) {
-        this.isFile = isFile;
+        this.fileType = isFile;
     }
 
     private void toStringDFS(FilePathEnity filePathEnity, JSONObject jsonObject){
