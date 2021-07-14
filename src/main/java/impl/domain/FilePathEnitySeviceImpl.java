@@ -3,7 +3,9 @@ package impl.domain;
 import Service.domain.FilePathEnitySevice;
 import Service.excute.ProxyExcute;
 import Service.excute.factory.SearchExcuteFactory;
+import com.sun.istack.internal.NotNull;
 import enity.FilePathEnity;
+import utill.FIleUnit;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,22 +28,58 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
     }
 
-    public FilePathEnitySeviceImpl(String path){
-        this.path=path;
-    }
-
-
     @Override
     public FilePathEnity findAll() {
 
-        return null;
+        FilePathEnity filePathEnity=null;
+
+        if(this.path.equals("")){
+            File[] roots=File.listRoots();
+            if(roots!=null){
+                List<FilePathEnity> filePathEnities=new ArrayList<>();
+                for(File file:roots){
+                    FilePathEnity filePathEnitytemp=findAllUnit(file);
+                    if(filePathEnities!=null){
+                        filePathEnities.add(filePathEnitytemp);
+                    }
+                    filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FIleUnit.judgeFileType(file));
+                }
+            }
+        }else {
+            File file=new File(this.path);
+            if(file!=null){
+                filePathEnity=findAllUnit(file);
+            }
+        }
+
+        return filePathEnity;
 
     }
 
-    @Override
-    public FilePathEnity findAll(String path) {
+    private FilePathEnity findAllUnit(@NotNull File file){
+        FilePathEnity filePathEnity=null;
+        File[] files=file.listFiles();
+        List<FilePathEnity> filePathEnities=new ArrayList<>();
 
-        return null;
+        if(files!=null && files.length>0){
+
+            for(File fileUnit:files){
+                FilePathEnity filePathEnitytemp=findAllUnit(fileUnit);
+                if(filePathEnitytemp!=null){
+                    filePathEnities.add(filePathEnitytemp);
+                }
+            }
+        }
+        filePathEnity=new FilePathEnity(file.getPath(),null,filePathEnities,FIleUnit.judgeFileType(file));
+
+        return filePathEnity;
+    }
+
+    @Override
+    public FilePathEnity findAll(@NotNull String path) {
+
+        this.path=path;
+        return findAll();
     }
 
     @Override
@@ -156,6 +194,8 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     public FilePathEnitySevice traversalLeafFile(String searchExcuteImplName) {
         return null;
     }
+
+
 
 
 }

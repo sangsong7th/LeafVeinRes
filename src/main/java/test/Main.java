@@ -1,6 +1,9 @@
 package test;
 
+import Service.domain.FilePathEnitySevice;
 import Service.userlevel.FileBuildService;
+import enity.FilePathEnity;
+import impl.domain.FilePathEnitySeviceImpl;
 import impl.userlevel.FileBuildServiceImpl;
 import utill.FIleUnit;
 
@@ -31,6 +34,9 @@ public class Main {
 //            bfsFilePath.searchAllnoReturn("D:\\testspace\\A","SearchExcuteForCreateFileConfig");
 
 
+        FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
+
+        FilePathEnity filePathEnity=filePathEnitySevice.findAll(null);
 
         /**
             //遍历更新配置文件

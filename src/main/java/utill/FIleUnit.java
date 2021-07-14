@@ -117,4 +117,12 @@ public class FIleUnit {
             }
         return 0L;
     }
+    public static long judgeFileType(File file){
+        long result=0L;
+        if(file.isDirectory()){
+            return result+1;
+        }else{
+            return result+0;
+        }
+    }
 }
