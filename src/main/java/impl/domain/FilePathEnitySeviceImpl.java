@@ -139,25 +139,44 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
         }else{
             File file=new File(this.path);
             File[] files=file.listFiles();
+            if(files!=null&&files.length>0){
+                for(File fileUnit:files){
+                    findLeafFileUnit(fileUnit,filePathEnities);
+                }
+            }
         }
         return filePathEnities;
     }
 
     @Override
     public List<FilePathEnity> findLeafFile(String path) {
-        return null;
+        this.path=path;
+        return findLeafFile();
     }
 
     private void findLeafFileUnit(File file,List<FilePathEnity> filePathEnities){
+        if(FIleUnit.judgeFileType(file)==1){
+            //进行字典遍历
+            File[] files=file.listFiles();
+            if (files!=null&&files.length>0){
+                for(File fileUnit:files){
+                    findLeafFileUnit(fileUnit,filePathEnities);
+                }
+            }
+        }else{
+            filePathEnities.add(
+                    new FilePathEnity(file.getPath(),null,null,FIleUnit.judgeFileType(file))
+            );
+        }
         return;
     }
 
     @Override
-    public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
+    public FilePathEnitySevice traversalAll(String searchExcuteImplName) {
         SearchExcuteFactory searchExcuteFactory=new SearchExcuteFactory();
         proxyExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
 
-        if(path.equals("")){
+        if(this.path.equals("")){
 
             File[] roots=File.listRoots();
             for(File file:roots){
@@ -166,7 +185,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
         }else{
 
-            traversalAllUnit(path);
+            traversalAllUnit(this.path);
 
         }
         return null;
@@ -211,13 +230,41 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
-    public FilePathEnitySevice traversalAll(String path) {
-        return null;
+    public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
+        this.path=path;
+        return traversalAll(searchExcuteImplName);
     }
 
     @Override
     public FilePathEnitySevice traversalCurrentPath(String path, String searchExcuteImplName) {
-        return null;
+
+        if(this.path.equals("")){
+
+            File[] roots=File.listRoots();
+            if(roots!=null){
+
+                for(File file:roots){
+
+                }
+            }
+
+        }else{
+            File file=new File(this.path);
+            File[] files=file.listFiles();
+            List<FilePathEnity> filePathEnities=new ArrayList<>();
+
+            if(files!=null && files.length>0){
+
+                for(File fileUnit:files){
+
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(fileUnit.getPath(),null,null,FIleUnit.judgeFileType(fileUnit));
+                    filePathEnities.add(filePathEnitytemp);
+
+                }
+            }
+            filePathEnity=new FilePathEnity(this.path,null,filePathEnities,FIleUnit.judgeFileType(file));
+        }
+        return filePathEnity;
     }
 
     @Override

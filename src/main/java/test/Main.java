@@ -8,6 +8,7 @@ import impl.userlevel.FileBuildServiceImpl;
 import utill.FIleUnit;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -36,8 +37,10 @@ public class Main {
 
         FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
 
-        FilePathEnity filePathEnity=filePathEnitySevice.findAll(null);
 
+        List<FilePathEnity> filePathEnities=filePathEnitySevice.findLeafFile("D:\\IDEA\\cxttpc\\service_clue\\clue_api\\src\\main\\java");
+
+        FilePathEnity filePathEnity=filePathEnitySevice.findAll("D:\\IDEA\\cxttpc\\service_clue\\clue_api\\src\\main\\java");
         /**
             //遍历更新配置文件
                 //判断是否存在配置文件
