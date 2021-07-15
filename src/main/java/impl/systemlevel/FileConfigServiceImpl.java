@@ -23,7 +23,7 @@ public class FileConfigServiceImpl implements FileConfigService {
         /**
          * 判断是否是文件路径
          */
-        if(filePathEnity.getIsFile()!=0){
+        if(filePathEnity.getFileType()!=0){
             return false;
         }
         /*
@@ -100,7 +100,7 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         for(FilePathEnity filePathEnityUnit:filePathEnity.getFiles()){
             PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
-                    filePathEnityUnit.getIsFile()==1?false:true,
+                    filePathEnityUnit.getFileType()==0?false:true,
                     false,false,
                     filePathEnityUnit.getAbsolutePath(),true,"");
             pathUnitConfigEnityList.add(pathUnitConfigEnity);

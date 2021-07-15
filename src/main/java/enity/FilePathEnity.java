@@ -83,12 +83,12 @@ public class FilePathEnity {
         this.before = before;
     }
 
-    public long getIsFile() {
+    public long getFileType() {
         return fileType;
     }
 
-    public void setIsFile(long isFile) {
-        this.fileType = isFile;
+    public void setFileType(long fileType) {
+        this.fileType = fileType;
     }
 
     private void toStringDFS(FilePathEnity filePathEnity, JSONObject jsonObject){

@@ -10,9 +10,9 @@ import impl.excute.factoryEnities.SearchExcuteForCreateFileConfig;
  * @since 2021/5/27
  */
 
-public class SearchExcuteFactory {
+public class ExcuteFactory {
 
-    public ProxyExcute getPorduct(String classname){
+    public static ProxyExcute getPorduct(String classname){
 
         switch (classname){
             case "SearchExcuteForCreateFileConfig":{

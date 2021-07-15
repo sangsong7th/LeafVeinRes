@@ -2,6 +2,7 @@ package Service.domain;
 
 import enity.FilePathEnity;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,17 +22,21 @@ public interface FilePathEnitySevice {
 
     List<FilePathEnity> findLeafFile(String path);
 
-    FilePathEnitySevice traversalAll(String path,String searchExcuteImplName);
+    FilePathEnitySevice traversalAllDir(String searchExcuteImplName) throws IOException;
 
-    FilePathEnitySevice traversalAll(String searchExcuteImplName);
+    FilePathEnitySevice traversalAll(String path, String searchExcuteImplName) throws IOException;
 
-    FilePathEnitySevice traversalCurrentPath(String path,String searchExcuteImplName);
+    FilePathEnitySevice traversalAllDir(String path, String searchExcuteImplName) throws IOException;
 
-    FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName);
+    FilePathEnitySevice traversalAll(String searchExcuteImplName) throws IOException;
 
-    FilePathEnitySevice traversalLeafFile(String path,String searchExcuteImplName);
+    FilePathEnitySevice traversalCurrentPath(String path,String searchExcuteImplName) throws IOException;
 
-    FilePathEnitySevice traversalLeafFile(String searchExcuteImplName);
+    FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName) throws IOException;
+
+    FilePathEnitySevice traversalLeafFile(String path,String searchExcuteImplName) throws IOException;
+
+    FilePathEnitySevice traversalLeafFile(String searchExcuteImplName) throws IOException;
 
 
 }

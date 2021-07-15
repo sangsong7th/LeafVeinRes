@@ -2,7 +2,7 @@ package impl.domain;
 
 import Service.domain.FilePathEnitySevice;
 import Service.excute.ProxyExcute;
-import Service.excute.factory.SearchExcuteFactory;
+import Service.excute.factory.ExcuteFactory;
 import com.sun.istack.internal.NotNull;
 import enity.FilePathEnity;
 import utill.FIleUnit;
@@ -172,48 +172,41 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
-    public FilePathEnitySevice traversalAll(String searchExcuteImplName) {
-        SearchExcuteFactory searchExcuteFactory=new SearchExcuteFactory();
-        proxyExcute=searchExcuteFactory.getPorduct(searchExcuteImplName);
+    public FilePathEnitySevice traversalAllDir(String searchExcuteImplName) throws IOException {
+
+        proxyExcute= ExcuteFactory.getPorduct(searchExcuteImplName);
 
         if(this.path.equals("")){
 
             File[] roots=File.listRoots();
             for(File file:roots){
-                traversalAllUnit(file.getPath());
+                traversalAllUnitDir(file);
             }
 
         }else{
 
-            traversalAllUnit(this.path);
+            traversalAllUnitDir(new File(this.path));
 
         }
-        return null;
+        return this;
     }
 
-    private void traversalAllUnit(String path){
+
+
+    private void traversalAllUnitDir(File file) throws IOException {
 
         if(proxyExcute==null){
             return;
         }
 
-        File dir=new File(path);
-
-        File[] files=dir.listFiles();
-
-        this.path=path;
-
-        FilePathEnity filePathEnity=findCurrentPath();
-
-        try {
-            proxyExcute.Excute(filePathEnity);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(dir.isFile()){
+        if(file.isFile()){
             return;
         }
+
+        proxyExcute.Excute(file);
+
+        File[] files=file.listFiles();
+
 
         if(files==null || files.length==0){
 
@@ -221,8 +214,8 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
         }else {
 
-            for(File file:files){
-                traversalAllUnit(file.getPath());
+            for(File fileUnit:files){
+                traversalAllUnitDir(fileUnit);
             }
 
         }
@@ -230,57 +223,148 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     @Override
-    public FilePathEnitySevice traversalAll(String path,String searchExcuteImplName) {
+    public FilePathEnitySevice traversalAllDir(String path, String searchExcuteImplName) throws IOException {
+        this.path=path;
+        return traversalAllDir(searchExcuteImplName);
+    }
+
+    @Override
+    public FilePathEnitySevice traversalAll(String path, String searchExcuteImplName) throws IOException {
         this.path=path;
         return traversalAll(searchExcuteImplName);
     }
 
     @Override
-    public FilePathEnitySevice traversalCurrentPath(String path, String searchExcuteImplName) {
+    public FilePathEnitySevice traversalAll(String searchExcuteImplName) throws IOException {
+
+        proxyExcute=ExcuteFactory.getPorduct(searchExcuteImplName);
+        if(this.path.equals("")){
+
+            File[] roots=File.listRoots();
+            for(File file:roots){
+                traversalAllUnit(file);
+            }
+
+        }else{
+
+            traversalAllUnit(new File(this.path));
+
+        }
+        return this;
+    }
+
+    private void traversalAllUnit(File file) throws IOException {
+
+        if(proxyExcute==null){
+            return;
+        }
+
+
+
+        if(file.isFile()){
+            return;
+        }
+
+
+        File[] files=file.listFiles();
+
+
+
+        if(files==null || files.length==0){
+
+            return;
+
+        }else {
+
+            for(File fileUnit:files){
+
+                proxyExcute.Excute(fileUnit);
+
+                traversalAllUnit(fileUnit);
+            }
+
+        }
+
+    }
+
+    @Override
+    public FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName) throws IOException {
+
+        proxyExcute=ExcuteFactory.getPorduct(searchExcuteImplName);
 
         if(this.path.equals("")){
 
             File[] roots=File.listRoots();
             if(roots!=null){
 
-                for(File file:roots){
-
+                for(File fileUnit:roots){
+                    proxyExcute.Excute(fileUnit);
                 }
             }
 
         }else{
             File file=new File(this.path);
             File[] files=file.listFiles();
-            List<FilePathEnity> filePathEnities=new ArrayList<>();
 
             if(files!=null && files.length>0){
 
                 for(File fileUnit:files){
-
-                    FilePathEnity filePathEnitytemp=new FilePathEnity(fileUnit.getPath(),null,null,FIleUnit.judgeFileType(fileUnit));
-                    filePathEnities.add(filePathEnitytemp);
-
+                    proxyExcute.Excute(fileUnit);
                 }
             }
-            filePathEnity=new FilePathEnity(this.path,null,filePathEnities,FIleUnit.judgeFileType(file));
+
         }
-        return filePathEnity;
+        return this;
     }
 
     @Override
-    public FilePathEnitySevice traversalCurrentPath(String searchExcuteImplName) {
-        return null;
+    public FilePathEnitySevice traversalCurrentPath(String path, String searchExcuteImplName) throws IOException {
+        this.path=path;
+        return traversalCurrentPath(searchExcuteImplName);
     }
 
     @Override
-    public FilePathEnitySevice traversalLeafFile(String path, String searchExcuteImplName) {
-        return null;
+    public FilePathEnitySevice traversalLeafFile(String path, String searchExcuteImplName) throws IOException {
+        this.path=path;
+        return traversalLeafFile(searchExcuteImplName);
     }
 
     @Override
-    public FilePathEnitySevice traversalLeafFile(String searchExcuteImplName) {
-        return null;
+    public FilePathEnitySevice traversalLeafFile(String searchExcuteImplName) throws IOException {
+
+        proxyExcute=ExcuteFactory.getPorduct(searchExcuteImplName);
+
+        if(this.path.equals("")){
+
+            File[] roots=File.listRoots();
+            for(File file:roots){
+                traversalLeafFileUnit(file);
+            }
+
+        }else{
+
+            traversalLeafFileUnit(new File(this.path));
+
+        }
+        return this;
     }
+
+    private void traversalLeafFileUnit(File file) throws IOException {
+        if(file.isFile()){
+            proxyExcute.Excute(file);
+        }
+        if(file.isDirectory()){
+            File[] files=file.listFiles();
+            if(files!=null && files.length<0){
+                for(File fileUnit:files){
+                    traversalLeafFileUnit(fileUnit);
+                }
+            }else {
+                return;
+            }
+        }
+    }
+
 
 
 
