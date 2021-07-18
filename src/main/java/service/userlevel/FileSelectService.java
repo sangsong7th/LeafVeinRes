@@ -1,4 +1,4 @@
-package Service.userlevel;
+package service.userlevel;
 
 /**
  * <p>用于用户级release的文件选择相关的接口</p>

@@ -1,4 +1,4 @@
-package Service.domain;
+package service.domain;
 
 import enity.FilePathEnity;
 

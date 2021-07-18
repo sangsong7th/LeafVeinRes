@@ -12,13 +12,13 @@ public class ExplanationUnit {
 
     /**
      * <p>进行分类构建</p>
-     * /A;B;C/1;2/C;B;D
      * @author sangsong6th
      * @since 2021/7/11
-     * @param classifyPath
+     * @param classifyPath /A;B;C/1;2/C;B;D
+     * @return  size = 6 \\德语\\轻柔
      * @return
      */
-    private Stack<String> explanClassifyPath(String classifyPath) {
+    public static Stack<String> explanClassifyPath(String classifyPath) {
 
         List<String> subClassify = StringUnit.stringSplit(classifyPath, "/");
         Stack<String> tempA = new Stack<>();

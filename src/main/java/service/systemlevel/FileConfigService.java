@@ -1,4 +1,4 @@
-package Service.systemlevel;
+package service.systemlevel;
 
 import enity.FilePathEnity;
 import enity.PathConfigEnity;
@@ -15,7 +15,7 @@ import java.util.Map;
 public interface FileConfigService {
 
     /**
-     * <p>通过路径实体创建文件配置</p>
+     * <p>通过文件实体创建当前文件配置</p>
      * @param filePathEnity
      * @return
      * @throws IOException
@@ -33,6 +33,16 @@ public interface FileConfigService {
      * @since 2021/5/27
      */
     boolean createFileConfig(PathConfigEnity pathConfigEnity) throws IOException;
+
+    /**
+     * <p>通过文件路径进行遍历文件配置</p>
+     * @param filePath
+     * @return
+     * @throws IOException
+     * @author sangsong6th
+     * @since 2021/5/27
+     */
+    boolean createFileConfig(String filePath) throws IOException;
 
 
     boolean ishasFLP(String FilePath);

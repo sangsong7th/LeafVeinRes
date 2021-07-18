@@ -1,14 +1,15 @@
 package test;
 
-import Service.domain.FilePathEnitySevice;
-import Service.userlevel.FileBuildService;
+import service.domain.FilePathEnitySevice;
+import service.userlevel.FileBuildService;
 import enity.FilePathEnity;
 import impl.domain.FilePathEnitySeviceImpl;
 import impl.userlevel.FileBuildServiceImpl;
-import utill.FIleUnit;
+import utill.ExplanationUnit;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -38,9 +39,16 @@ public class Main {
         FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
 
 
-        List<FilePathEnity> filePathEnities=filePathEnitySevice.findLeafFile("D:\\IDEA\\cxttpc\\service_clue\\clue_api\\src\\main\\java");
+//        List<FilePathEnity> filePathEnities=filePathEnitySevice.findLeafFile("E:\\PxEzR18");
+//
+//        FilePathEnity filePathEnity=filePathEnitySevice.findAll("E:\\PxEzR18");
+//
+//        FilePathEnity filePathEnity1=filePathEnitySevice.findCurrentPath("E:\\PxEzR18");
+//
+//        Stack<String> strings= ExplanationUnit.explanClassifyPath("/汉语;英语;德语/轻柔;欢快/");
 
-        FilePathEnity filePathEnity=filePathEnitySevice.findAll("D:\\IDEA\\cxttpc\\service_clue\\clue_api\\src\\main\\java");
+        fileBuildService.buildClassPaths("/汉语;英语;德语/轻柔;欢快/","E:\\音乐");
+        System.out.println(1);
         /**
             //遍历更新配置文件
                 //判断是否存在配置文件

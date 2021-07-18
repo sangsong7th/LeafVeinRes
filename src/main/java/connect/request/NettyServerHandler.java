@@ -1,7 +1,9 @@
 package connect.request;
 
+import connect.aop.NettyToBean;
 import connect.aop.Scanner;
 
+import connect.entity.Test;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -60,7 +62,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 
 
-                //Test test= (Test) NettyToBean.getchange(decoder,Test.class);
+                Test test= (Test) NettyToBean.getchange(decoder,Test.class);
 
 
 

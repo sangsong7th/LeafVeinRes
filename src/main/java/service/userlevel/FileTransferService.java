@@ -1,4 +1,4 @@
-package Service.userlevel;
+package service.userlevel;
 
 /**
  * <p>用于用户级别的展示文件的信息的接口</p>

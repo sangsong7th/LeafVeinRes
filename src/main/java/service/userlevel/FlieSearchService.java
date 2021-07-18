@@ -1,4 +1,4 @@
-package Service.userlevel;
+package service.userlevel;
 
 public interface FlieSearchService {
 

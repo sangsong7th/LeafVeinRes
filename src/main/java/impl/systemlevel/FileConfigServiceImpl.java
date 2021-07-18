@@ -1,11 +1,13 @@
 package impl.systemlevel;
 
-import Service.systemlevel.FileConfigService;
+import service.domain.FilePathEnitySevice;
+import service.systemlevel.FileConfigService;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.istack.internal.NotNull;
 import enity.FilePathEnity;
 import enity.PathConfigEnity;
 import enity.PathUnitConfigEnity;
+import impl.domain.FilePathEnitySeviceImpl;
 import utill.FIleUnit;
 import utill.StringUnit;
 
@@ -18,12 +20,14 @@ import java.util.Map;
 
 public class FileConfigServiceImpl implements FileConfigService {
 
+    private FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
+
     @Override
     public boolean createFileConfig(FilePathEnity filePathEnity) throws IOException {
         /**
          * 判断是否是文件路径
          */
-        if(filePathEnity.getFileType()!=0){
+        if(filePathEnity.getFileType()!=1){
             return false;
         }
         /*
@@ -52,6 +56,12 @@ public class FileConfigServiceImpl implements FileConfigService {
         List<String> locationPathSplits=StringUnit.stringSplit(pathConfigEnity.getLocationPath(),"\\\\");
         String result= JSONObject.toJSONString(pathConfigEnity);
         FIleUnit.outputJSONString(result,pathConfigEnity.getLocationPath()+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
+        return true;
+    }
+
+    @Override
+    public boolean createFileConfig(String filePath) throws IOException {
+        filePathEnitySevice.traversalAllDir(filePath,"ExcuteForCreateFileConfig");
         return true;
     }
 

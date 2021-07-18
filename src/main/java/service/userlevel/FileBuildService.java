@@ -1,4 +1,4 @@
-package Service.userlevel;
+package service.userlevel;
 
 import java.util.List;
 import java.util.Map;
