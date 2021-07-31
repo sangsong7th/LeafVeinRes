@@ -1,16 +1,18 @@
 package impl.userlevel;
 
+import impl.domain.CatalogueConfigServceImpl;
+import impl.domain.PathToCatalogueCofigImpl;
 import impl.systemlevel.FileConfigServiceImpl;
+import service.domain.CatalogueConfigServce;
 import service.domain.FilePathEnitySevice;
+import service.domain.PathToCatalogueConfigService;
 import service.userlevel.FileBuildService;
 import impl.domain.FilePathEnitySeviceImpl;
 import utill.ExplanationUnit;
-import utill.FIleUnit;
+import utill.FileUnit;
 import service.systemlevel.FileConfigService;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -22,13 +24,16 @@ public class FileBuildServiceImpl implements FileBuildService {
     
     private FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
     private FileConfigService fileConfigService=new FileConfigServiceImpl();
+    private PathToCatalogueConfigService pathToCatalogueConfigService = new PathToCatalogueCofigImpl();
+    private CatalogueConfigServce catalogueConfigServce=new CatalogueConfigServceImpl();
 
     @Override
-    public boolean buildClassPaths(String classifyPath, String classifyRoot) {
+    public boolean buildClassPaths(String classifyPath, String classifyRoot,String name) {
 
+        pathToCatalogueConfigService.buildConfig(name,classifyRoot);
         Stack<String> relativeDirStack=ExplanationUnit.explanClassifyPath(classifyPath);
         for(String relativeDir:relativeDirStack){
-            FIleUnit.createDir(classifyRoot+relativeDir);
+            FileUnit.createDir(classifyRoot+relativeDir);
         }
 
         try {
@@ -36,34 +41,11 @@ public class FileBuildServiceImpl implements FileBuildService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        catalogueConfigServce.buildConfig(name,classifyRoot);
         return true;
     }
 
-    @Override
-    public boolean buildClassPaths(Map<String, String> classifyStrAndRoots) {
 
-        for(String key: classifyStrAndRoots.keySet()){
-            buildClassPaths(key,classifyStrAndRoots.get(key));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean buildClassPaths(List<String> classifyStrs, String classRoot) {
-
-        for(String unit:classifyStrs){
-            buildClassPaths(unit,classRoot);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean buildClassPaths(String classifyStr, List<String> classRoots) {
-        for(String unit:classRoots){
-            buildClassPaths(classifyStr,unit);
-        }
-        return false;
-    }
 
 
 

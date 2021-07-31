@@ -8,7 +8,7 @@ import enity.FilePathEnity;
 import enity.PathConfigEnity;
 import enity.PathUnitConfigEnity;
 import impl.domain.FilePathEnitySeviceImpl;
-import utill.FIleUnit;
+import utill.FileUnit;
 import utill.StringUnit;
 
 import java.io.File;
@@ -38,15 +38,11 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         List<String> locationPathSplits= StringUnit.stringSplit(locationPath,"\\\\");
 
-        PathConfigEnity pathConfigEnity=buildPathConfigEnity(filePathEnity,false,false,false,
-                false,false,false,
-                "",null,"",
-                "",null,"",null);
-
+        PathConfigEnity pathConfigEnity=buildPathConfigEnity(filePathEnity);
 
         String result= JSONObject.toJSONString(pathConfigEnity);
 
-        FIleUnit.outputJSONString(result,locationPath+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
+        FileUnit.outputJSONString(result,locationPath+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
 
         return true;
     }
@@ -55,7 +51,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     public boolean createFileConfig(PathConfigEnity pathConfigEnity) throws IOException {
         List<String> locationPathSplits=StringUnit.stringSplit(pathConfigEnity.getLocationPath(),"\\\\");
         String result= JSONObject.toJSONString(pathConfigEnity);
-        FIleUnit.outputJSONString(result,pathConfigEnity.getLocationPath()+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
+        FileUnit.outputJSONString(result,pathConfigEnity.getLocationPath()+"\\"+locationPathSplits.get(locationPathSplits.size()-1)+".FLP");
         return true;
     }
 
@@ -66,53 +62,19 @@ public class FileConfigServiceImpl implements FileConfigService {
     }
 
 
-    public PathConfigEnity buildPathConfigEnity (FilePathEnity filePathEnity,
-                                                 boolean bolnClassRoot,
-                                                 boolean bolnDistributeDir,
-                                                 boolean bolnMaster,
-                                                 boolean bolnSlave,
-                                                 boolean bolnUpdataOver,
-                                                 boolean bolnVirPath,
-                                                 String classpath,
-                                                 List<String> distributedDir,
-                                                 String hashcode,
-                                                 String masterDir,
-                                                 List<String> slaveDir,
-                                                 String virClassPath,
-                                                 List<String> virClassPaths){
+    public PathConfigEnity buildPathConfigEnity (FilePathEnity filePathEnity){
         PathConfigEnity pathConfigEnity=new PathConfigEnity();
 
-        String LocatPath=filePathEnity.getAbsolutePath();
+        String locatPath=filePathEnity.getAbsolutePath();
 
-        pathConfigEnity.setBolnClassRoot(bolnClassRoot);
-        pathConfigEnity.setBolnDistributeDir(bolnDistributeDir);
-        pathConfigEnity.setBolnMaster(bolnMaster);
-        pathConfigEnity.setBolnSlave(bolnSlave);
-        pathConfigEnity.setBolnUpdataOver(bolnUpdataOver);
-        pathConfigEnity.setBolnVirPath(bolnVirPath);
-        pathConfigEnity.setClassPath(classpath);
-
-        if(bolnDistributeDir) {
-            pathConfigEnity.setDistributedDir(distributedDir);
-        }else{
-            pathConfigEnity.setDistributedDir(null);
-        }
-
-        pathConfigEnity.setHashcode(hashcode);
-        pathConfigEnity.setLocationPath(LocatPath);
-        pathConfigEnity.setMasterDir(masterDir);
-
-        pathConfigEnity.setSlaveDir(slaveDir);
-        pathConfigEnity.setVirClassPath(virClassPath);
-        pathConfigEnity.setVirClassPaths(virClassPaths);
+        pathConfigEnity.setLocationPath(locatPath);
 
         List<PathUnitConfigEnity> pathUnitConfigEnityList=new ArrayList<>();
 
         for(FilePathEnity filePathEnityUnit:filePathEnity.getFiles()){
             PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
                     filePathEnityUnit.getFileType()==0?false:true,
-                    false,false,
-                    filePathEnityUnit.getAbsolutePath(),true,"");
+                    filePathEnityUnit.getAbsolutePath(),filePathEnityUnit.getAbsolutePath());
             pathUnitConfigEnityList.add(pathUnitConfigEnity);
         }
 
@@ -122,12 +84,10 @@ public class FileConfigServiceImpl implements FileConfigService {
 
     }
 
-    public PathUnitConfigEnity buildPathUnitConfigEnity(boolean bolnDir, boolean bolnVir, boolean bolnUpdata, String path,
-                                                        boolean scannerDir, String truePath){
+    public PathUnitConfigEnity buildPathUnitConfigEnity(boolean bolnDir, String path,
+                                                        String truePath){
         PathUnitConfigEnity unitConfigEnity=new PathUnitConfigEnity();
         unitConfigEnity.setBolnDir(bolnDir);
-        unitConfigEnity.setBolnVir(bolnVir);
-        unitConfigEnity.setBolnUpdata(bolnUpdata);
         List<String> paths=StringUnit.stringSplit(path,"\\\\");
 
         String locationPath="";
@@ -139,16 +99,13 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         if(!bolnDir) {
 
-            unitConfigEnity.setMd5(FIleUnit.getMd5(path));
-
-
-            unitConfigEnity.setSize(FIleUnit.getSize(path));
+            unitConfigEnity.setMd5(FileUnit.getMd5(path));
+            unitConfigEnity.setSize(FileUnit.getSize(path));
 
         }
 
         unitConfigEnity.setName(paths.get(paths.size()-1));
 
-        unitConfigEnity.setScannerDir(scannerDir);
 
         unitConfigEnity.setTruePath(truePath);
 
@@ -187,7 +144,7 @@ public class FileConfigServiceImpl implements FileConfigService {
             return false;
         }
 
-        if(Md5.equals(FIleUnit.getMd5(filePath))){
+        if(Md5.equals(FileUnit.getMd5(filePath))){
             return true;
         }
 
@@ -218,19 +175,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     @Override
     public boolean addNewOne(@NotNull PathConfigEnity pathConfigEnity, String path) throws IOException {
 
-        List<PathUnitConfigEnity> pathUnitConfigEnities=pathConfigEnity.getPathUnitConfigEnityList();
 
-
-        PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
-                new File(path).isFile(),
-                false,false,
-                path,true,"");
-
-        pathUnitConfigEnities.add(pathUnitConfigEnity);
-
-        pathConfigEnity.setPathUnitConfigEnityList(pathUnitConfigEnities);
-
-        createFileConfig(pathConfigEnity);
 
         return true;
 
@@ -246,28 +191,7 @@ public class FileConfigServiceImpl implements FileConfigService {
 
         Map<String,PathUnitConfigEnity> result=new HashMap<>();
 
-        List<PathUnitConfigEnity> pathUnitConfigEnities=pathConfigEnity.getPathUnitConfigEnityList();
 
-        File file=new File(pathConfigEnity.getLocationPath());
-
-        File[] files=file.listFiles();
-
-
-        for(File fileUnit:files){
-
-            PathUnitConfigEnity pathUnitConfigEnity=buildPathUnitConfigEnity(
-                    fileUnit.isFile(),
-                    false,false,
-                    fileUnit.getPath(),true,"");
-
-            result.put(fileUnit.getPath(),pathUnitConfigEnity);
-        }
-
-        for(PathUnitConfigEnity pathUnitConfigEnity:pathUnitConfigEnities){
-
-            result.remove(pathUnitConfigEnity.getLocationPath());
-
-        }
 
         return result;
     }

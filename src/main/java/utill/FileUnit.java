@@ -12,7 +12,7 @@ import static sun.security.pkcs11.wrapper.Functions.toHexString;
  * @author sangsong6th
  * @since 2021/5/27
  */
-public class FIleUnit {
+public class FileUnit {
 
     public static boolean createDir(String path){
         File file=new File(path);

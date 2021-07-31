@@ -14,8 +14,11 @@ import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder;
 import io.netty.util.CharsetUtil;
 import utill.StringUnit;
 
+import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -27,9 +30,25 @@ import java.util.List;
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     private String result="";
+
+    private static Map<String, Method> hashMap=new HashMap<>();
+
+    private static Class<connect.request.Test> clazz;
+
+    private static connect.request.Test test=new connect.request.Test();
     /*
      * 收到消息时，返回信息
      */
+    static {
+        clazz= connect.request.Test.class;
+        try {
+            Method method=clazz.getMethod("add",Integer.class);
+            hashMap.put("add",method);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     @Override
@@ -42,6 +61,9 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         FullHttpRequest httpRequest = (FullHttpRequest)msg;
 
         try{
+
+
+
             String path=httpRequest.uri();          //获取路径
             String body = getBody(httpRequest);     //获取参数
             HttpMethod method=httpRequest.method();//获取请求方法
@@ -51,18 +73,27 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             List<String> paths= StringUnit.stringSplit(pathTemp.get(0),"/");
             System.out.println("接收到:"+method+" 请求");
 
+
             if(HttpMethod.GET.equals(method)){
                 //接受到的消息，做业务逻辑处理...
                 QueryStringDecoder decoder= new QueryStringDecoder(httpRequest.uri());
 
                 System.out.println("body:"+decoder);
+                System.out.println(path);
                 Scanner scanner=new Scanner();
 
                 String result=null;
 
 
+                if(paths.get(1).equals("add")){
+                    Method method1=hashMap.get(paths.get(1));
+                    method1.invoke(test,1);
+                    List<Integer> integers=test.getData();
+                    System.out.println("");
+                }
 
-                Test test= (Test) NettyToBean.getchange(decoder,Test.class);
+
+                Test test1= (Test) NettyToBean.getchange(decoder,Test.class);
 
 
 

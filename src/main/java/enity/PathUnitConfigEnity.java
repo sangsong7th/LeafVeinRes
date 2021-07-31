@@ -42,9 +42,18 @@ public class PathUnitConfigEnity {
     /*
     是否是可以扫描的地址
      */
-    private boolean isScannerDir;
+    private boolean bolnScannerDir;
 
     public PathUnitConfigEnity() {
+        this.name="";
+        this.locationPath="";
+        this.truePath="";
+        this.bolnUpdata=false;
+        this.size=0L;
+        this.md5="";
+        this.bolnDir=false;
+        this.bolnVir=false;
+        this.bolnScannerDir=true;
     }
 
     public String getName() {
@@ -111,12 +120,12 @@ public class PathUnitConfigEnity {
         this.bolnVir = bolnVir;
     }
 
-    public boolean isScannerDir() {
-        return isScannerDir;
+    public boolean isBolnScannerDir() {
+        return bolnScannerDir;
     }
 
-    public void setScannerDir(boolean scannerDir) {
-        isScannerDir = scannerDir;
+    public void setBolnScannerDir(boolean bolnScannerDir) {
+        this.bolnScannerDir = bolnScannerDir;
     }
 
     @Override
@@ -130,7 +139,7 @@ public class PathUnitConfigEnity {
                 ", md5='" + md5 + '\'' +
                 ", bolnDir=" + bolnDir +
                 ", bolnVir=" + bolnVir +
-                ", isScannerDir=" + isScannerDir +
+                ", bolnScannerDir=" + bolnScannerDir +
                 '}';
     }
 }

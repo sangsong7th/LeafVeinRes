@@ -10,11 +10,6 @@ import java.util.Map;
  */
 public interface FileBuildService {
 
-    boolean buildClassPaths(String classifyStr,String classRoot);
+    boolean buildClassPaths(String classifyStr,String classRoot,String name);
 
-    boolean buildClassPaths(Map<String,String> classifyStrAndRoots);
-
-    boolean buildClassPaths(List<String> classifyStrs,String classRoot);
-
-    boolean buildClassPaths(String classifyStr,List<String> classRoots);
 }

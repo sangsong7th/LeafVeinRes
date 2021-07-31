@@ -18,7 +18,7 @@ public class FilePathEnity {
 
     /**
      * 1:是文件路径
-     * 2:是文件
+     * 0:是文件
      * 4:是文件封装成软件形式的文件
      * 这样设计的目的是为了处理方便位运算
      */
@@ -92,7 +92,7 @@ public class FilePathEnity {
     }
 
     private void toStringDFS(FilePathEnity filePathEnity, JSONObject jsonObject){
-        if(filePathEnity.files==null){
+        if(filePathEnity.files==null||filePathEnity.files.size()<=0){
             jsonObject.put(filePathEnity.absolutePath,new JSONArray());
         }else{
             JSONArray jsonArray=new JSONArray();
@@ -106,16 +106,54 @@ public class FilePathEnity {
 
     }
 
+    private void toStringDirDFS(FilePathEnity filePathEnity, JSONObject jsonObject){
+        if(filePathEnity.files==null||filePathEnity.files.size()<=0){
+            if(filePathEnity.fileType==1) {
+                jsonObject.put(filePathEnity.absolutePath, new JSONArray());
+            }else {
+                return;
+            }
+        }else{
+            JSONArray jsonArray=new JSONArray();
+            for(FilePathEnity filePathEnityTemp:filePathEnity.files){
+                JSONObject jsonObjecttemp=new JSONObject();
+                toStringDirDFS(filePathEnityTemp,jsonObjecttemp);
+                jsonArray.add(jsonObjecttemp);
+            }
+            jsonObject.put(filePathEnity.absolutePath,jsonArray);
+        }
+
+    }
+
     @Override
     public String toString() {
 
-        if(this.files==null){
+        if(this.files==null||this.files.size()<=0){
             result.put(this.absolutePath,new JSONArray());
         }else{
             JSONArray jsonArray=new JSONArray();
             for(FilePathEnity filePathEnity:this.files){
                 JSONObject jsonObjecttemp=new JSONObject();
                 toStringDFS(filePathEnity,jsonObjecttemp);
+                jsonArray.add(jsonObjecttemp);
+            }
+            result.put(this.absolutePath,jsonArray);
+        }
+
+        return result.toJSONString();
+    }
+
+    public String toStringDir() {
+
+        if(this.files==null||this.files.size()<=0){
+            if(this.fileType==1||this.files.size()<=0) {
+                result.put(this.absolutePath, new JSONArray());
+            }
+        }else{
+            JSONArray jsonArray=new JSONArray();
+            for(FilePathEnity filePathEnity:this.files){
+                JSONObject jsonObjecttemp=new JSONObject();
+                toStringDirDFS(filePathEnity,jsonObjecttemp);
                 jsonArray.add(jsonObjecttemp);
             }
             result.put(this.absolutePath,jsonArray);

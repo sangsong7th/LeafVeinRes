@@ -1,54 +1,24 @@
 package test;
 
-import service.domain.FilePathEnitySevice;
-import service.userlevel.FileBuildService;
 import enity.FilePathEnity;
 import impl.domain.FilePathEnitySeviceImpl;
+import impl.domain.PathToCatalogueCofigImpl;
 import impl.userlevel.FileBuildServiceImpl;
-import utill.ExplanationUnit;
+import service.domain.FilePathEnitySevice;
+import service.domain.PathToCatalogueConfigService;
+import service.userlevel.FileBuildService;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Stack;
+import java.util.HashMap;
 
 public class Main {
+
+
     public static void main(String[] args) throws IOException {
-        FileBuildService fileBuildService=new FileBuildServiceImpl();
-        /**
-         * list 添加
-         */
-        /**
-         * 单个添加
-         */
-//        fileBuildService.BuildClassPaths("/文字;图片;视频;混合;声音/","E:\\媒体");
-
-//
-//        BFSFilePath findFilePath=new BFSFilePath("D:\\testspace\\cxttpc\\service_content");
-//        FilePathEnity filePathEnity=findFilePath.findPathlist();
-//        CreateFileConfig createFileConfig=new FirestCreatFileConfig();
-//        createFileConfig.createFileConfig(filePathEnity);
-
-//        CreateFilePath createFilePath=new FirstCreatFilePath();
-//        createFilePath.createFilePath("/A;B;C/1;2/C;B;D","D:\\testspace");
-
-            //初始化配置文件
-//            BFSFilePath bfsFilePath=new BFSFilePath();
-//            bfsFilePath.searchAllnoReturn("D:\\testspace\\A","SearchExcuteForCreateFileConfig");
 
 
-        FilePathEnitySevice filePathEnitySevice=new FilePathEnitySeviceImpl();
 
 
-//        List<FilePathEnity> filePathEnities=filePathEnitySevice.findLeafFile("E:\\PxEzR18");
-//
-//        FilePathEnity filePathEnity=filePathEnitySevice.findAll("E:\\PxEzR18");
-//
-//        FilePathEnity filePathEnity1=filePathEnitySevice.findCurrentPath("E:\\PxEzR18");
-//
-//        Stack<String> strings= ExplanationUnit.explanClassifyPath("/汉语;英语;德语/轻柔;欢快/");
-
-        fileBuildService.buildClassPaths("/汉语;英语;德语/轻柔;欢快/","E:\\音乐");
-        System.out.println(1);
         /**
             //遍历更新配置文件
                 //判断是否存在配置文件

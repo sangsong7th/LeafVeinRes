@@ -5,7 +5,7 @@ import service.excute.ProxyExcute;
 import service.excute.factory.ExcuteFactory;
 import com.sun.istack.internal.NotNull;
 import enity.FilePathEnity;
-import utill.FIleUnit;
+import utill.FileUnit;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,7 +70,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
                 }
             }
         }
-        filePathEnity=new FilePathEnity(file.getPath(),null,filePathEnities,FIleUnit.judgeFileType(file));
+        filePathEnity=new FilePathEnity(file.getPath(),null,filePathEnities, FileUnit.judgeFileType(file));
 
         return filePathEnity;
     }
@@ -97,11 +97,11 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
             if(roots!=null){
                 List<FilePathEnity> filePathEnities=new ArrayList<>();
                 for(File file:roots){
-                    FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null,FIleUnit.judgeFileType(file));
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(file.getPath(),null,null, FileUnit.judgeFileType(file));
                     if(filePathEnities!=null){
                         filePathEnities.add(filePathEnitytemp);
                     }
-                    filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FIleUnit.judgeFileType(file));
+                    filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FileUnit.judgeFileType(file));
                 }
             }
 
@@ -114,12 +114,12 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
 
                 for(File fileUnit:files){
 
-                    FilePathEnity filePathEnitytemp=new FilePathEnity(fileUnit.getPath(),null,null,FIleUnit.judgeFileType(fileUnit));
+                    FilePathEnity filePathEnitytemp=new FilePathEnity(fileUnit.getPath(),null,null, FileUnit.judgeFileType(fileUnit));
                     filePathEnities.add(filePathEnitytemp);
 
                 }
             }
-            filePathEnity=new FilePathEnity(this.path,null,filePathEnities,FIleUnit.judgeFileType(file));
+            filePathEnity=new FilePathEnity(this.path,null,filePathEnities, FileUnit.judgeFileType(file));
         }
         return filePathEnity;
     }
@@ -153,7 +153,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
     }
 
     private void findLeafFileUnit(File file,List<FilePathEnity> filePathEnities){
-        if(FIleUnit.judgeFileType(file)==1){
+        if(FileUnit.judgeFileType(file)==1){
             //进行字典遍历
             File[] files=file.listFiles();
             if (files!=null&&files.length>0){
@@ -163,7 +163,7 @@ public class FilePathEnitySeviceImpl implements FilePathEnitySevice {
             }
         }else{
             filePathEnities.add(
-                    new FilePathEnity(file.getPath(),null,null,FIleUnit.judgeFileType(file))
+                    new FilePathEnity(file.getPath(),null,null, FileUnit.judgeFileType(file))
             );
         }
         return;
